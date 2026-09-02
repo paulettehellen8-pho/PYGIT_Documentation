@@ -1276,3 +1276,254 @@ body.docs-open header {
     padding: 76px 18px 55px;
   }
 }
+
+
+/* =========================================================
+   FINAL LAYOUT POLISH
+   - Keep hero copy above the landscape artwork.
+   - Contain the documentation typography inside the card.
+   - Use a compact, readable scale before falling back to
+     the card's internal scroll for unusually long sections.
+   ========================================================= */
+
+.hero::after {
+  z-index: 6;
+}
+
+.hero-content {
+  z-index: 20;
+  width: min(980px, 88vw);
+  margin-top: -6px;
+}
+
+#text {
+  font-size: clamp(3.25rem, 7.6vw, 7rem);
+  letter-spacing: -4px;
+  line-height: .96;
+}
+
+.hero-subtitle {
+  margin-top: 16px;
+  font-size: clamp(.9rem, 1.55vw, 1.08rem);
+  line-height: 1.45;
+}
+
+.hero-hint {
+  margin-top: 8px;
+}
+
+#btn {
+  margin-top: 22px;
+  padding: 11px 25px;
+  font-size: .94rem;
+}
+
+.mountains-front {
+  z-index: 8;
+}
+
+.game-layer {
+  z-index: 7;
+}
+
+/* Documentation frame */
+.doc-card {
+  width: min(77vw, 1110px);
+  height: min(80vh, 760px);
+  min-height: 0;
+  top: 51.5%;
+}
+
+.card-body {
+  padding: 82px 52px 34px;
+}
+
+.doc-inner {
+  width: min(930px, 100%);
+  padding-bottom: 10px;
+}
+
+.kicker {
+  font-size: 10px;
+  margin-bottom: 7px;
+}
+
+.card-heading {
+  margin-bottom: 14px;
+}
+
+.card-heading .card-number {
+  font-size: 9px;
+}
+
+.doc-section h2 {
+  font-size: clamp(1.65rem, 2.55vw, 2.5rem);
+  line-height: 1.05;
+  margin-bottom: 14px;
+  letter-spacing: -1.5px;
+}
+
+.lede {
+  max-width: 900px;
+  margin-bottom: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.doc-card .bullets {
+  gap: 8px;
+  max-width: 900px;
+}
+
+.doc-card .bullets li {
+  padding-left: 21px;
+  font-size: 13.5px;
+  line-height: 1.52;
+}
+
+.doc-card .bullets li::before {
+  top: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+.doc-card .steps {
+  gap: 9px;
+  max-width: 900px;
+}
+
+.doc-card .steps li {
+  font-size: 13.5px;
+  line-height: 1.52;
+  padding-left: 40px;
+}
+
+.doc-card table {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.doc-card th,
+.doc-card td {
+  padding: 9px 12px;
+  line-height: 1.4;
+}
+
+.doc-card th {
+  font-size: 10px;
+}
+
+.doc-card .callout {
+  margin-top: 14px;
+  padding: 13px 17px;
+  max-width: 930px;
+}
+
+.doc-card .callout-label {
+  font-size: 9px;
+  margin-bottom: 6px;
+}
+
+.doc-card .callout p {
+  font-size: 12.5px;
+  line-height: 1.52;
+}
+
+.doc-card .feature-grid {
+  gap: 12px;
+}
+
+.doc-card .feature-card {
+  padding: 11px;
+}
+
+.doc-card .feature-card h3 {
+  font-size: 13px;
+}
+
+.doc-card .feature-card p {
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.doc-card .triad {
+  gap: 11px;
+}
+
+.doc-card .triad-card,
+.doc-card .block,
+.doc-card .team-card {
+  padding: 15px;
+}
+
+.doc-card .term pre {
+  min-height: 0;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* Keep the stack visually tucked behind the active card. */
+.doc-card.is-behind {
+  filter: saturate(.72) brightness(.64);
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    width: min(760px, 86vw);
+  }
+
+  #text {
+    font-size: clamp(3rem, 10vw, 5.8rem);
+  }
+
+  .doc-card {
+    left: calc(50% + 12px);
+    width: min(84vw, 760px);
+    height: 80vh;
+  }
+
+  .card-body {
+    padding: 78px 28px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-content {
+    width: 88vw;
+    margin-top: -22px;
+  }
+
+  #text {
+    font-size: clamp(2.55rem, 13vw, 4.6rem);
+    letter-spacing: -2px;
+  }
+
+  .hero-subtitle {
+    font-size: .82rem;
+  }
+
+  #btn {
+    margin-top: 18px;
+  }
+
+  .doc-card {
+    top: 48%;
+    width: 88vw;
+    height: 76vh;
+  }
+
+  .card-body {
+    padding: 72px 18px 48px;
+  }
+
+  .doc-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .lede,
+  .doc-card .bullets li,
+  .doc-card .steps li {
+    font-size: 12.5px;
+  }
+}

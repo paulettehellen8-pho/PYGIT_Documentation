@@ -35,6 +35,39 @@ function closeDocumentation() {
   renderDeck();
 }
 
+
+function fitCardContent(card) {
+  if (!card) return;
+  const body = card.querySelector('.card-body');
+  const inner = body?.querySelector('.doc-inner');
+  if (!body || !inner) return;
+
+  // Reset first so every section is measured at its intended CSS size.
+  body.style.zoom = '1';
+
+  const available = body.clientHeight - 8;
+  let scale = 1;
+
+  // Compact the active page only when necessary. The minimum keeps
+  // the documentation comfortably readable; longer pages retain
+  // their own internal scroll rather than overflowing the card.
+  while (inner.scrollHeight > available && scale > 0.78) {
+    scale = Math.max(0.78, scale - 0.03);
+    body.style.zoom = String(scale);
+  }
+
+  body.style.overflowY = inner.scrollHeight > body.clientHeight ? 'auto' : 'hidden';
+}
+
+function resetCardFit() {
+  sections.forEach(card => {
+    const body = card.querySelector('.card-body');
+    const inner = card.querySelector('.doc-inner');
+    if (body) { body.style.fontSize = ''; body.style.zoom = '1'; }
+    if (inner) inner.style.transform = '';
+  });
+}
+
 function renderDeck() {
   const total = sections.length;
 
@@ -62,6 +95,7 @@ function renderDeck() {
   if (active) {
     const titleText = active.querySelector('h2')?.textContent || '';
     document.title = `${titleText} — PyGit TUI`;
+    window.requestAnimationFrame(() => fitCardContent(active));
   }
 }
 
