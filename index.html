@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>PyGit TUI — Project Documentation</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+         rel="stylesheet"
+      />
+      <link rel="stylesheet" href="style.css" />
+   </head>
+   <body>
+      <nav>
+         <div class="logo mono">pygit<span>_tui</span></div>
+         <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li>
+               <a
+                  href="https://github.com/yourusername/pygit-tui"
+                  target="_blank"
+                  >GitHub</a
+               >
+            </li>
+         </ul>
+      </nav>
+
+      <div class="hero">
+         <h1>
+            PyGit TUI<br /><span class="accent"
+               >git, without leaving the terminal.</span
+            >
+         </h1>
+         <p class="sub">
+            A junior-built, Textual-powered TUI git client — live dashboard,
+            staging, diffs, commits, and conflict resolution, all orbiting one
+            terminal.
+         </p>
+
+         <div class="orbit-wrap">
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="ring ring3"></div>
+
+            <div class="core mono">lg.py<br />core</div>
+
+            <div class="orbiter-group r1">
+               <div class="node">Dashboard</div>
+            </div>
+            <div class="orbiter-group r2">
+               <div class="node">Staging<br />&amp; Diff</div>
+            </div>
+            <div class="orbiter-group r3">
+               <div class="node a">Commit<br />Modal</div>
+               <div class="node b">Conflict<br />Resolver</div>
+            </div>
+         </div>
+      </div>
+
+      <section id="features">
+         <h2><span class="num">01</span>Features</h2>
+         <p class="lede">
+            Five core modules, each shelling out to real git via subprocess — no
+            reimplemented git internals, just a friendlier face on top of it.
+         </p>
+
+         <div class="grid">
+            <div>
+               <div class="term">
+                  <div class="term-bar">
+                     <span class="dot red"></span
+                     ><span class="dot yellow"></span
+                     ><span class="dot green"></span>
+                     <span class="term-title">dashboard.py</span>
+                  </div>
+                  <div class="term-body">
+                     <span class="c1">$</span> pygit-tui
+                     <span class="c3"
+                        ># status | staged | branches | log | stash</span
+                     >
+                     <span class="c1">●</span> main
+                     <span class="c3">3 ahead, 0 behind</span>
+                  </div>
+               </div>
+               <div class="feature-name">Live Dashboard</div>
+               <div class="feature-desc">
+                  Two-column view of status, staged/unstaged files, branches,
+                  commit log, and stash — updates as you work.
+               </div>
+            </div>
+
+            <div>
+               <div class="term">
+                  <div class="term-bar">
+                     <span class="dot red"></span
+                     ><span class="dot yellow"></span
+                     ><span class="dot green"></span>
+                     <span class="term-title">diff_viewer.py</span>
+                  </div>
+                  <div class="term-body">
+                     <span class="c2">- old_line = None</span>
+                     <span class="c1">+ old_line = get_diff()</span>
+                     <span class="c3">@@ -12,7 +12,7 @@</span>
+                  </div>
+               </div>
+               <div class="feature-name">Diff Viewer</div>
+               <div class="feature-desc">
+                  Side-panel diff rendering for any selected file, staged or
+                  unstaged, before you commit.
+               </div>
+            </div>
+
+            <div>
+               <div class="term">
+                  <div class="term-bar">
+                     <span class="dot red"></span
+                     ><span class="dot yellow"></span
+                     ><span class="dot green"></span>
+                     <span class="term-title">commit_modal.py</span>
+                  </div>
+                  <div class="term-body">
+                     <span class="c3">Commit message:</span>
+                     <span class="c1">&gt; fix: handle empty stash list</span>
+                     <span class="c3">[Enter] confirm [Esc] cancel</span>
+                  </div>
+               </div>
+               <div class="feature-name">Commit Modal</div>
+               <div class="feature-desc">
+                  A focused modal for writing and confirming commit messages
+                  without breaking flow.
+               </div>
+            </div>
+
+            <div>
+               <div class="term">
+                  <div class="term-bar">
+                     <span class="dot red"></span
+                     ><span class="dot yellow"></span
+                     ><span class="dot green"></span>
+                     <span class="term-title">command_palette.py</span>
+                  </div>
+                  <div class="term-body">
+                     <span class="c3">Ctrl+P</span>
+                     <span class="c1">&gt; stash</span>
+                     <span class="c1">&gt; switch</span>
+                     <span class="c1">&gt; merge</span>
+                     <span class="c1">&gt; pull</span>
+                     <span class="c1">&gt; push</span>
+                  </div>
+               </div>
+               <div class="feature-name">Command Palette</div>
+               <div class="feature-desc">
+                  Quick-access palette for stash, switch, merge, pull, and push
+                  without memorizing flags.
+               </div>
+            </div>
+
+            <div>
+               <div class="term">
+                  <div class="term-bar">
+                     <span class="dot red"></span
+                     ><span class="dot yellow"></span
+                     ><span class="dot green"></span>
+                     <span class="term-title">git_checker.py</span>
+                  </div>
+                  <div class="term-body">
+                     <span class="c2">CONFLICT (content): app.py</span>
+                     <span class="c3">[o] ours [t] theirs [m] manual</span>
+                  </div>
+               </div>
+               <div class="feature-name">Merge Conflict Handler</div>
+               <div class="feature-desc">
+                  Surfaces conflicting files during a merge and lets you resolve
+                  them without dropping to raw git output.
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section id="demo">
+         <h2><span class="num">02</span>See it run</h2>
+         <p class="lede">
+            A simulated session — staging a file, writing a commit message, and
+            pushing.
+         </p>
+
+         <div class="demo-term">
+            <div class="term-bar">
+               <span class="dot red"></span><span class="dot yellow"></span
+               ><span class="dot green"></span>
+               <span class="term-title">pygit-tui — session</span>
+            </div>
+            <div id="typed"></div>
+         </div>
+      </section>
+
+      <section id="stack">
+         <h2><span class="num">03</span>Stack</h2>
+         <table>
+            <tr>
+               <th>Layer</th>
+               <th>Tool</th>
+               <th>Why</th>
+            </tr>
+            <tr>
+               <td>UI framework</td>
+               <td>Textual</td>
+               <td>Python-native TUI widgets, async-friendly</td>
+            </tr>
+            <tr>
+               <td>Git operations</td>
+               <td>subprocess + git CLI</td>
+               <td>No reimplementing git internals</td>
+            </tr>
+            <tr>
+               <td>Language</td>
+               <td>Python 3.11</td>
+               <td>Assignment requirement</td>
+            </tr>
+            <tr>
+               <td>Docs site</td>
+               <td>HTML / CSS / vanilla JS</td>
+               <td>No build step, ships straight to GitHub Pages</td>
+            </tr>
+         </table>
+      </section>
+
+      <footer>
+         Built by a team of junior developers, inspired by lazygit. © 2026 PyGit
+         TUI.
+      </footer>
+
+      <script src="script.js"></script>
+   </body>
+</html>
