@@ -1,352 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PyGit TUI — Project Documentation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyGit TUI — Project Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="logo mono">pygit<span>_tui</span></div>
-  <div class="page-counter mono"><span id="curPage">01</span> / <span id="totalPages">15</span></div>
-</nav>
-
-<div class="scroll-container" id="scrollContainer">
-
-  <!-- 00 COVER -->
-  <section class="page cover" id="p0">
-    <div class="mini-orbit">
-      <div class="ring r1"></div>
-      <div class="ring r2"></div>
-      <div class="core mono">lg.py</div>
-    </div>
-    <h1 class="cover-title">PyGit TUI</h1>
-    <p class="cover-sub">A Lightweight Terminal Git Client, Built in Python</p>
-    <p class="cover-meta">Project Proposal &amp; Documentation</p>
-    <p class="placeholder">[Course / Unit Name]</p>
-    <p class="placeholder">[Team Name] &nbsp;·&nbsp; [Team Members]</p>
-    <p class="placeholder">[Scrum Master Name]</p>
-    <p class="cover-date">September 2026</p>
-  </section>
-
-  <!-- 01 PROJECT OVERVIEW -->
-  <section class="page" id="p1">
-    <div class="kicker mono">01 · Project Overview</div>
-    <h2>Project Overview</h2>
-    <table>
-      <tr><th>Field</th><th>Details</th></tr>
-      <tr><td>Project Name</td><td>PyGit TUI</td></tr>
-      <tr><td>Project Type</td><td>Command-line / terminal application (Python)</td></tr>
-      <tr><td>Assignment</td><td>Build a CLI-based project in Python</td></tr>
-      <tr><td>Inspiration</td><td>lazygit (existing open-source, Go-based terminal Git client) — referenced only as a concept and interaction model, not copied</td></tr>
-      <tr><td>Team</td><td class="placeholder">[Team Members]</td></tr>
-      <tr><td>Scrum Master</td><td class="placeholder">[Scrum Master Name]</td></tr>
-      <tr><td>Course / Cohort</td><td class="placeholder">[Course Name]</td></tr>
-    </table>
-    <div class="callout">
-      <span class="callout-label mono">IN ONE SENTENCE</span>
-      <p>PyGit TUI is a terminal dashboard that lets developers see their Git status, stage files, view diffs, and run common Git commands — without memorizing flags or leaving the keyboard.</p>
-    </div>
-  </section>
-
-  <!-- 02 TARGET USERS -->
-  <section class="page" id="p2">
-    <div class="kicker mono">02 · Target Users</div>
-    <h2>Target Users</h2>
-    <p class="lede">PyGit TUI is aimed at people who use Git regularly but find the raw CLI unforgiving:</p>
-    <ul class="bullets">
-      <li>Junior developers and students who are still building confidence with Git commands and benefit from seeing status, branches, and diffs all at once.</li>
-      <li>Bootcamp / university cohorts working on group repositories, where merge conflicts and staging mistakes are common early mistakes.</li>
-      <li>Terminal-first developers who want a lightweight, no-GUI-install alternative to tools like GitHub Desktop, without needing the full feature set of established tools like lazygit or tig.</li>
+  <!-- PARALLAX HEADER -->
+  <header id="header">
+    <a href="#home" class="logo">PyGit</a>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#team">Team</a></li>
     </ul>
-    <div class="callout">
-      <span class="callout-label mono">WHY THIS MATTERS</span>
-      <p>Git's CLI is powerful but unforgiving — a single wrong flag can lose work. A visual, keyboard-driven dashboard reduces that risk while still teaching the underlying commands (every action is logged verbatim in the command log).</p>
+  </header>
+
+  <!-- PARALLAX HERO -->
+  <section class="hero" id="home">
+    <div class="stars" id="stars"></div>
+    <div class="moon" id="moon"></div>
+    <div class="mountains mountains-behind" id="mountains_behind"></div>
+
+    <div class="hero-content">
+      <h1 id="text">PyGit TUI</h1>
+      <p class="hero-subtitle">A Lightweight Terminal Git Client, Built in Python</p>
+      <a href="#documentation" id="btn">Explore Documentation</a>
     </div>
+
+    <div class="mountains mountains-front" id="mountains_front"></div>
   </section>
 
-  <!-- 03 PROBLEM STATEMENT -->
-  <section class="page" id="p3">
-    <div class="kicker mono">03 · Problem Statement</div>
-    <h2>Problem Statement</h2>
-    <p class="lede">Git is the industry-standard version control system, but its command-line interface presents real friction for newer developers:</p>
-    <ul class="bullets">
-      <li>Core actions (staging, diffing, stashing, branching) each require separate commands and flags, which are easy to forget or mistype.</li>
-      <li>There is no single view that shows file status, branch state, recent commits, and stashes together — developers must run several commands just to get their bearings.</li>
-      <li>Merge conflicts are especially intimidating for beginners, who often don't know whether it's safe to continue or abort.</li>
-      <li>Existing polished solutions (e.g. lazygit) are excellent but are written in Go and are effectively "black boxes" to a Python-focused learning team — there's little room to learn from or extend them in a class setting.</li>
-    </ul>
-  </section>
+  <!-- DOCUMENTATION -->
+  <main id="documentation">
 
-  <!-- 04 PROPOSED SOLUTION -->
-  <section class="page" id="p4">
-    <div class="kicker mono">04 · Proposed Solution</div>
-    <h2>Proposed Solution</h2>
-    <p class="lede">PyGit TUI re-creates the core experience of a terminal Git dashboard, in Python, using the <strong>Textual</strong> framework. It wraps everyday Git commands behind a live, two-column terminal interface so a developer can see everything relevant to their repository at a glance and act on it with single keystrokes.</p>
-    <div class="triad">
-      <div class="triad-card">
-        <div class="triad-icon">👁</div>
-        <h3>See</h3>
-        <p>Live status, file changes, branches, commit history, and stashes — refreshed automatically.</p>
-      </div>
-      <div class="triad-card">
-        <div class="triad-icon">⌨</div>
-        <h3>Act</h3>
-        <p>Stage/unstage, commit, stash, switch or merge branches, pull and push — via keybindings and a command palette.</p>
-      </div>
-      <div class="triad-card">
-        <div class="triad-icon">🛟</div>
-        <h3>Recover</h3>
-        <p>A dedicated conflict view with abort/continue controls for merges, plus a raw command runner for anything not yet covered.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 OBJECTIVES -->
-  <section class="page" id="p5">
-    <div class="kicker mono">05 · Objectives</div>
-    <h2>Objectives</h2>
-    <ul class="bullets">
-      <li>Provide a single-screen, always-current view of a Git repository's state.</li>
-      <li>Let users stage, unstage, and commit changes without typing raw Git commands.</li>
-      <li>Support the most common day-to-day Git operations (stash, branch switch, merge, pull, push) through a lightweight command palette.</li>
-      <li>Make merge conflicts easier to navigate, by clearly listing conflicted files and offering guided abort/continue actions.</li>
-      <li>Keep a visible, honest log of every underlying Git command run, so the tool never hides what it's actually doing — supporting learning, not just convenience.</li>
-      <li>Build the whole tool as a fair, junior-appropriate scope: fewer features than lazygit, but each one working reliably.</li>
-    </ul>
-  </section>
-
-  <!-- 06 KEY FEATURES -->
-  <section class="page wide" id="p6">
-    <div class="kicker mono">06 · Key Features</div>
-    <h2>Key Features</h2>
-    <div class="grid">
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">dashboard.py</span></div>
-          <div class="term-body"><span class="c1">$</span> pygit-tui
-<span class="c3"># status | staged | branches | log | stash</span>
-<span class="c1">●</span> main <span class="c3">3 ahead, 0 behind</span></div>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">01 · Project Overview</div>
+        <h2>Project Overview</h2>
+        <table>
+          <tr><th>Field</th><th>Details</th></tr>
+          <tr><td>Project Name</td><td>PyGit TUI</td></tr>
+          <tr><td>Project Type</td><td>Command-line / terminal application (Python)</td></tr>
+          <tr><td>Assignment</td><td>Build a CLI-based project in Python</td></tr>
+          <tr><td>Inspiration</td><td>lazygit (existing open-source, Go-based terminal Git client) — referenced only as a concept and interaction model, not copied</td></tr>
+          <tr><td>Team</td><td class="placeholder">[Team Members]</td></tr>
+          <tr><td>Scrum Master</td><td class="placeholder">[Scrum Master Name]</td></tr>
+          <tr><td>Course / Cohort</td><td class="placeholder">[Course Name]</td></tr>
+        </table>
+        <div class="callout">
+          <span class="callout-label mono">IN ONE SENTENCE</span>
+          <p>PyGit TUI is a terminal dashboard that lets developers see their Git status, stage files, view diffs, and run common Git commands — without memorizing flags or leaving the keyboard.</p>
         </div>
-        <div class="feature-name">6.1 Live Repository Dashboard</div>
-        <div class="feature-desc">Continuously displays repo status, changed files with staged/unstaged markers, local branches, recent commit history, and active stashes. Panels refresh on an interval.</div>
       </div>
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">diff_viewer.py</span></div>
-          <div class="term-body"><span class="c2">- old_line = None</span>
-<span class="c1">+ old_line = get_diff()</span>
-<span class="c3">@@ -12,7 +12,7 @@</span></div>
-        </div>
-        <div class="feature-name">6.2 File Staging &amp; Diff Viewer</div>
-        <div class="feature-desc">Selecting a file shows its diff in the right panel. Space toggles staged/unstaged, calling git add or git restore --staged behind the scenes.</div>
-      </div>
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">commit_modal.py</span></div>
-          <div class="term-body"><span class="c3">Commit message:</span>
-<span class="c1">&gt; fix: handle empty stash list</span>
-<span class="c3">[Enter] confirm  [Esc] cancel</span></div>
-        </div>
-        <div class="feature-name">6.3 Guided Commit</div>
-        <div class="feature-desc">Pressing c opens a commit modal. Submitting runs git commit -m and immediately refreshes the file list.</div>
-      </div>
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">command_palette.py</span></div>
-          <div class="term-body"><span class="c3">:</span>
-<span class="c1">&gt; stash</span> <span class="c1">&gt; switch</span> <span class="c1">&gt; merge</span>
-<span class="c1">&gt; pull</span>  <span class="c1">&gt; push</span></div>
-        </div>
-        <div class="feature-name">6.4 Command Palette</div>
-        <div class="feature-desc">Pressing : opens a palette of common Git actions, each bound to a single letter. Actions needing a branch name prompt via a follow-up input modal.</div>
-      </div>
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">git_checker.py</span></div>
-          <div class="term-body"><span class="c2">CONFLICT (content): app.py</span>
-<span class="c3">[ctrl+g] continue  [ctrl+a] abort</span></div>
-        </div>
-        <div class="feature-name">6.5 Merge Conflict Handling</div>
-        <div class="feature-desc">A dedicated panel lists every file still in conflict. Once resolved and staged, continue (ctrl+g) or abort (ctrl+a) without memorizing recovery commands.</div>
-      </div>
-      <div>
-        <div class="term">
-          <div class="term-bar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="term-title">command_log.py</span></div>
-          <div class="term-body"><span class="c3">$ git add app.py</span>
-<span class="c3">$ git commit -m "fix: ..."</span>
-<span class="c1">&gt; type a raw command...</span></div>
-        </div>
-        <div class="feature-name">6.6 Command Log &amp; Raw Command Runner</div>
-        <div class="feature-desc">Every UI action is echoed into a running log showing the exact Git command and output — a transparent teaching aid. The same panel accepts arbitrary shell commands.</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 07 SYSTEM ARCHITECTURE -->
-  <section class="page" id="p7">
-    <div class="kicker mono">07 · System Architecture</div>
-    <h2>System Architecture</h2>
-    <table>
-      <tr><th>Layer</th><th>Technology</th></tr>
-      <tr><td>Language</td><td>Python 3</td></tr>
-      <tr><td>Terminal UI framework</td><td>textual (widgets, reactive state, modal screens, CSS-like styling via .tcss files)</td></tr>
-      <tr><td>Git integration</td><td>Python subprocess module, shelling out to the system git binary — no third-party Git library</td></tr>
-      <tr><td>Styling</td><td>git_tui.tcss — Textual's CSS-like stylesheet controlling the two-column layout</td></tr>
-      <tr><td>Entry point</td><td>lg.py — defines the LazyGit Textual app and all panels/modals</td></tr>
-    </table>
-    <div class="callout">
-      <p>The design deliberately separates concerns: <code>git_checker.py</code> holds every function that talks to Git (status, diff, commit, branch, stash, merge, conflict detection), while <code>lg.py</code> is purely responsible for UI. This keeps the Git logic testable and reusable independent of the interface.</p>
-    </div>
-  </section>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">02 · Target Users</div>
+        <h2>Target Users</h2>
+        <p class="lede">PyGit TUI is aimed at people who use Git regularly but find the raw CLI unforgiving:</p>
+        <ul class="bullets">
+          <li>Junior developers and students who are still building confidence with Git commands and benefit from seeing status, branches, and diffs all at once.</li>
+          <li>Bootcamp / university cohorts working on group repositories, where merge conflicts and staging mistakes are common early mistakes.</li>
+          <li>Terminal-first developers who want a lightweight, no-GUI-install alternative to tools like GitHub Desktop, without needing the full feature set of established tools like lazygit or tig.</li>
+        </ul>
+        <div class="callout">
+          <span class="callout-label mono">WHY THIS MATTERS</span>
+          <p>Git's CLI is powerful but unforgiving — a single wrong flag can lose work. A visual, keyboard-driven dashboard reduces that risk while still teaching the underlying commands (every action is logged verbatim in the command log).</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- 08 SYSTEM WORKFLOW -->
-  <section class="page" id="p8">
-    <div class="kicker mono">08 · System Workflow</div>
-    <h2>System Workflow</h2>
-    <ol class="steps">
-      <li>User runs the app from inside a Git repository; the dashboard confirms repo status and populates all panels.</li>
-      <li>User browses changed files and previews diffs by highlighting entries in the file list.</li>
-      <li>User stages or unstages files with space as needed.</li>
-      <li>User presses c to commit, types a message in the modal, and confirms — the commit runs and the dashboard refreshes.</li>
-      <li>For anything beyond committing, the user opens the command palette (:) to stash, switch branch, merge, pull, or push.</li>
-      <li>If a merge produces conflicts, the conflict panel appears automatically, listing affected files until resolved and the merge is continued or aborted.</li>
-      <li>Throughout, the command log records every underlying Git call and result, and can also accept free-form commands directly.</li>
-    </ol>
-  </section>
-
-  <!-- 09 UI DESIGN -->
-  <section class="page" id="p9">
-    <div class="kicker mono">09 · User Interface Design</div>
-    <h2>User Interface Design</h2>
-    <p class="lede">A single terminal screen split into two columns, plus modal overlays for focused input:</p>
-    <div class="two-col-blocks">
-      <div class="block">
-        <h3>Main Dashboard</h3>
-        <ul class="bullets tight">
-          <li>Left column: repository status, file list (staged/unstaged), branch list, commit history, stash list.</li>
-          <li>Right column: diff viewer, merge-conflict panel (shown only when relevant), command log with an inline command runner.</li>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">03 · Problem Statement</div>
+        <h2>Problem Statement</h2>
+        <p class="lede">Git is the industry-standard version control system, but its command-line interface presents real friction for newer developers:</p>
+        <ul class="bullets">
+          <li>Core actions (staging, diffing, stashing, branching) each require separate commands and flags, which are easy to forget or mistype.</li>
+          <li>There is no single view that shows file status, branch state, recent commits, and stashes together — developers must run several commands just to get their bearings.</li>
+          <li>Merge conflicts are especially intimidating for beginners, who often don't know whether it's safe to continue or abort.</li>
+          <li>Existing polished solutions (e.g. lazygit) are excellent but are written in Go and are effectively "black boxes" to a Python-focused learning team — there's little room to learn from or extend them in a class setting.</li>
         </ul>
       </div>
-      <div class="block">
-        <h3>Modals</h3>
-        <ul class="bullets tight">
-          <li>Commit modal: single text input for the commit message.</li>
-          <li>Command palette: selectable list of common Git operations, each with a single-letter shortcut.</li>
-          <li>Branch input modal: text input for a branch name, used for switch and merge.</li>
+    </section>
+
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">04 · Proposed Solution</div>
+        <h2>Proposed Solution</h2>
+        <p class="lede">PyGit TUI re-creates the core experience of a terminal Git dashboard, in Python, using the <strong>Textual</strong> framework. It wraps everyday Git commands behind a live, two-column terminal interface so a developer can see everything relevant to their repository at a glance and act on it with single keystrokes.</p>
+        <div class="triad">
+          <div class="triad-card"><div class="triad-icon">👁</div><h3>See</h3><p>Live status, file changes, branches, commit history, and stashes — refreshed automatically.</p></div>
+          <div class="triad-card"><div class="triad-icon">⌨</div><h3>Act</h3><p>Stage/unstage, commit, stash, switch or merge branches, pull and push — via keybindings and a command palette.</p></div>
+          <div class="triad-card"><div class="triad-icon">🛟</div><h3>Recover</h3><p>A dedicated conflict view with abort/continue controls for merges, plus a raw command runner for anything not yet covered.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">05 · Objectives</div>
+        <h2>Objectives</h2>
+        <ul class="bullets">
+          <li>Provide a single-screen, always-current view of a Git repository's state.</li>
+          <li>Let users stage, unstage, and commit changes without typing raw Git commands.</li>
+          <li>Support the most common day-to-day Git operations (stash, branch switch, merge, pull, push) through a lightweight command palette.</li>
+          <li>Make merge conflicts easier to navigate, by clearly listing conflicted files and offering guided abort/continue actions.</li>
+          <li>Keep a visible, honest log of every underlying Git command run, so the tool never hides what it's actually doing — supporting learning, not just convenience.</li>
+          <li>Build the whole tool as a fair, junior-appropriate scope: fewer features than lazygit, but each one working reliably.</li>
         </ul>
       </div>
-    </div>
-    <div class="callout">
-      <p>Global keybindings include <code>d</code> to toggle light/dark theme, <code>c</code> to commit, and <code>:</code> to open the command palette — echoing familiar patterns from vim and lazygit for a low-friction learning curve.</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- 10 CURRENT PROGRESS -->
-  <section class="page" id="p10">
-    <div class="kicker mono">10 · Current Progress</div>
-    <h2>Current Progress</h2>
-    <table>
-      <tr><th>Feature</th><th>Status</th></tr>
-      <tr><td>Live status / file / branch / commit / stash panels</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>File staging &amp; unstaging</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>Diff viewer</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>Commit modal &amp; commit flow</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>Command palette (stash, switch, merge, pull, push)</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>Merge conflict detection, abort &amp; continue</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>Command log &amp; raw command runner</td><td><span class="status done">Implemented</span></td></tr>
-      <tr><td>AI-assisted commit message / command suggestions</td><td><span class="status planned">Planned</span></td></tr>
-    </table>
-    <p class="footnote">A full task breakdown and remaining to-do list will be added as a separate section by the team.</p>
-  </section>
-
-  <!-- 11 FUTURE ENHANCEMENTS -->
-  <section class="page" id="p11">
-    <div class="kicker mono">11 · Future Enhancements</div>
-    <h2>Future Enhancements</h2>
-    <p class="lede">Deliberately out of scope for the current MVP, but reasonable next steps:</p>
-    <ul class="bullets">
-      <li>AI-assisted prompting — using an AI API to suggest commit messages from staged diffs, or to explain a merge conflict in plain language.</li>
-      <li>A visual commit graph for branch history, rather than a flat log.</li>
-      <li>Interactive rebase support.</li>
-      <li>Config file support for custom keybindings, similar to lazygit's.</li>
-      <li>Packaging as an installable CLI tool (e.g. via pip) rather than running the script directly.</li>
-    </ul>
-  </section>
-
-  <!-- 12 PROJECT IMPACT -->
-  <section class="page" id="p12">
-    <div class="kicker mono">12 · Project Impact</div>
-    <h2>Project Impact</h2>
-    <div class="callout large">
-      <span class="callout-label mono">WHY THIS PROJECT IS WORTH BUILDING</span>
-      <p>It tackles a genuine pain point — Git's steep CLI learning curve — with a scope that's realistic for a junior team: not trying to out-build lazygit, but to understand and reproduce its core ideas in a language the team already knows well. It also doubles as a learning exercise in terminal UI design, process management via subprocess, and state-driven interfaces via Textual's reactive model.</p>
-    </div>
-  </section>
-
-  <!-- 13 CONCLUSION -->
-  <section class="page" id="p13">
-    <div class="kicker mono">13 · Conclusion</div>
-    <h2>Conclusion</h2>
-    <p class="lede">PyGit TUI takes a well-known problem — the friction of the raw Git CLI — and addresses it with a scoped, working Python terminal application. It is explicitly inspired by lazygit as a category of tool, not a copy of it, and the current build already covers the core loop a developer needs day-to-day: seeing repository state, staging and committing changes, handling branches and stashes, and recovering from merge conflicts.</p>
-    <p class="lede">The next additions — AI-assisted prompting and a completed task breakdown — will round out the proposal into a fuller submission.</p>
-  </section>
-
-  <!-- 14 MEET THE TEAM -->
-  <section class="page wide" id="p14">
-    <div class="kicker mono">14 · Team</div>
-    <h2>Meet Team Uzima</h2>
-    <div class="team-grid">
-      <div class="team-card" style="--card-color:#3ddc84">
-        <div class="team-icon">🛡️</div>
-        <div class="team-role mono">LEADERSHIP</div>
-        <div class="team-name">Paulette Obimbo</div>
-        <div class="team-desc">Team Lead — guiding project vision and overall strategic direction.</div>
+    <section class="doc-section wide">
+      <div class="doc-inner">
+        <div class="kicker mono">06 · Key Features</div>
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>dashboard.py</span></div><pre><b>$</b> pygit-tui
+<span># status | staged | branches | log | stash</span>
+<b>●</b> main <span>3 ahead, 0 behind</span></pre></div><h3>6.1 Live Repository Dashboard</h3><p>Continuously displays repo status, changed files with staged/unstaged markers, local branches, recent commit history, and active stashes. Panels refresh on an interval.</p></div>
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>diff_viewer.py</span></div><pre>- old_line = None
++ old_line = get_diff()
+<span>@@ -12,7 +12,7 @@</span></pre></div><h3>6.2 File Staging &amp; Diff Viewer</h3><p>Selecting a file shows its diff in the right panel. Space toggles staged/unstaged, calling git add or git restore --staged behind the scenes.</p></div>
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>commit_modal.py</span></div><pre><span>Commit message:</span>
+&gt; fix: handle empty stash list
+<span>[Enter] confirm  [Esc] cancel</span></pre></div><h3>6.3 Guided Commit</h3><p>Pressing c opens a commit modal. Submitting runs git commit -m and immediately refreshes the file list.</p></div>
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>command_palette.py</span></div><pre><span>:</span>
+&gt; stash   &gt; switch   &gt; merge
+&gt; pull    &gt; push</pre></div><h3>6.4 Command Palette</h3><p>Pressing : opens a palette of common Git actions, each bound to a single letter. Actions needing a branch name prompt via a follow-up input modal.</p></div>
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>git_checker.py</span></div><pre><span>CONFLICT (content): app.py</span>
+<span>[ctrl+g] continue [ctrl+a] abort</span></pre></div><h3>6.5 Merge Conflict Handling</h3><p>A dedicated panel lists every file still in conflict. Once resolved and staged, continue (ctrl+g) or abort (ctrl+a) without memorizing recovery commands.</p></div>
+          <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>command_log.py</span></div><pre><span>$ git add app.py</span>
+<span>$ git commit -m "fix: ..."</span>
+&gt; type a raw command...</pre></div><h3>6.6 Command Log &amp; Raw Command Runner</h3><p>Every UI action is echoed into a running log showing the exact Git command and output — a transparent teaching aid. The same panel accepts arbitrary shell commands.</p></div>
+        </div>
       </div>
-      <div class="team-card" style="--card-color:#4da3ff">
-        <div class="team-icon">🚩</div>
-        <div class="team-role mono">MANAGEMENT</div>
-        <div class="team-name">Tedd Edwin</div>
-        <div class="team-desc">Scrum Master — maintaining the repo, handling merge conflicts and solving pull requests.</div>
-      </div>
-      <div class="team-card" style="--card-color:#b085f5">
-        <div class="team-icon">&lt;/&gt;</div>
-        <div class="team-role mono">DEV</div>
-        <div class="team-name">Derick Nyakundi</div>
-        <div class="team-desc">Developer — web app architecture &amp; system features.</div>
-      </div>
-      <div class="team-card" style="--card-color:#ff5fa2">
-        <div class="team-icon">🤖</div>
-        <div class="team-role mono">DEV</div>
-        <div class="team-name">Eugene Okoth</div>
-        <div class="team-desc">Developer — integrating user-facing elements, and managing chatbot integration.</div>
-      </div>
-      <div class="team-card" style="--card-color:#f5a623">
-        <div class="team-icon">🎨</div>
-        <div class="team-role mono">DEV</div>
-        <div class="team-name">Kelvin Njenga</div>
-        <div class="team-desc">Developer — crafting clean UI/UX components &amp; performance.</div>
-      </div>
-    </div>
-    <p class="footnote center">Dedicated to Kenyan Mental Health Support</p>
-  </section>
+    </section>
 
-</div>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">07 · System Architecture</div>
+        <h2>System Architecture</h2>
+        <table>
+          <tr><th>Layer</th><th>Technology</th></tr>
+          <tr><td>Language</td><td>Python 3</td></tr>
+          <tr><td>Terminal UI framework</td><td>textual (widgets, reactive state, modal screens, CSS-like styling via .tcss files)</td></tr>
+          <tr><td>Git integration</td><td>Python subprocess module, shelling out to the system git binary — no third-party Git library</td></tr>
+          <tr><td>Styling</td><td>git_tui.tcss — Textual's CSS-like stylesheet controlling the two-column layout</td></tr>
+          <tr><td>Entry point</td><td>lg.py — defines the LazyGit Textual app and all panels/modals</td></tr>
+        </table>
+        <div class="callout"><p>The design deliberately separates concerns: <code>git_checker.py</code> holds every function that talks to Git (status, diff, commit, branch, stash, merge, conflict detection), while <code>lg.py</code> is purely responsible for UI. This keeps the Git logic testable and reusable independent of the interface.</p></div>
+      </div>
+    </section>
 
-<!-- NAV ARROWS -->
-<div class="nav-arrows">
-  <button id="upArrow" class="arrow-btn" aria-label="Previous page">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <button id="downArrow" class="arrow-btn" aria-label="Next page">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-</div>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">08 · System Workflow</div>
+        <h2>System Workflow</h2>
+        <ol class="steps">
+          <li>User runs the app from inside a Git repository; the dashboard confirms repo status and populates all panels.</li>
+          <li>User browses changed files and previews diffs by highlighting entries in the file list.</li>
+          <li>User stages or unstages files with space as needed.</li>
+          <li>User presses c to commit, types a message in the modal, and confirms — the commit runs and the dashboard refreshes.</li>
+          <li>For anything beyond committing, the user opens the command palette (:) to stash, switch branch, merge, pull, or push.</li>
+          <li>If a merge produces conflicts, the conflict panel appears automatically, listing affected files until resolved and the merge is continued or aborted.</li>
+          <li>Throughout, the command log records every underlying Git call and result, and can also accept free-form commands directly.</li>
+        </ol>
+      </div>
+    </section>
 
-<script src="script.js"></script>
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">09 · User Interface Design</div>
+        <h2>User Interface Design</h2>
+        <p class="lede">A single terminal screen split into two columns, plus modal overlays for focused input:</p>
+        <div class="two-col-blocks">
+          <div class="block"><h3>Main Dashboard</h3><ul class="bullets tight"><li>Left column: repository status, file list (staged/unstaged), branch list, commit history, stash list.</li><li>Right column: diff viewer, merge-conflict panel (shown only when relevant), command log with an inline command runner.</li></ul></div>
+          <div class="block"><h3>Modals</h3><ul class="bullets tight"><li>Commit modal: single text input for the commit message.</li><li>Command palette: selectable list of common Git operations, each with a single-letter shortcut.</li><li>Branch input modal: text input for a branch name, used for switch and merge.</li></ul></div>
+        </div>
+        <div class="callout"><p>Global keybindings include <code>d</code> to toggle light/dark theme, <code>c</code> to commit, and <code>:</code> to open the command palette — echoing familiar patterns from vim and lazygit for a low-friction learning curve.</p></div>
+      </div>
+    </section>
+
+    <!-- <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">10 · Current Progress</div>
+        <h2>Current Progress</h2>
+        <table>
+          <tr><th>Feature</th><th>Status</th></tr>
+          <tr><td>Live status / file / branch / commit / stash panels</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>File staging &amp; unstaging</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>Diff viewer</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>Commit modal &amp; commit flow</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>Command palette (stash, switch, merge, pull, push)</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>Merge conflict detection, abort &amp; continue</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>Command log &amp; raw command runner</td><td><span class="status done">Implemented</span></td></tr>
+          <tr><td>AI-assisted commit message / command suggestions</td><td><span class="status planned">Planned</span></td></tr>
+        </table>
+        <p class="footnote">A full task breakdown and remaining to-do list will be added as a separate section by the team.</p>
+      </div>
+    </section> -->
+
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">11 · Future Enhancements</div>
+        <h2>Future Enhancements</h2>
+        <p class="lede">Deliberately out of scope for the current MVP, but reasonable next steps:</p>
+        <ul class="bullets">
+          <li>AI-assisted prompting — using an AI API to suggest commit messages from staged diffs, or to explain a merge conflict in plain language.</li>
+          <li>A visual commit graph for branch history, rather than a flat log.</li>
+          <li>Interactive rebase support.</li>
+          <li>Config file support for custom keybindings, similar to lazygit's.</li>
+          <li>Packaging as an installable CLI tool (e.g. via pip) rather than running the script directly.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">12 · Project Impact</div>
+        <h2>Project Impact</h2>
+        <div class="callout large">
+          <span class="callout-label mono">WHY THIS PROJECT IS WORTH BUILDING</span>
+          <p>It tackles a genuine pain point — Git's steep CLI learning curve — with a scope that's realistic for a junior team: not trying to out-build lazygit, but to understand and reproduce its core ideas in a language the team already knows well. It also doubles as a learning exercise in terminal UI design, process management via subprocess, and state-driven interfaces via Textual's reactive model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <div class="doc-inner">
+        <div class="kicker mono">13 · Conclusion</div>
+        <h2>Conclusion</h2>
+        <p class="lede">PyGit TUI takes a well-known problem — the friction of the raw Git CLI — and addresses it with a scoped, working Python terminal application. It is explicitly inspired by lazygit as a category of tool, not a copy of it, and the current build already covers the core loop a developer needs day-to-day: seeing repository state, staging and committing changes, handling branches and stashes, and recovering from merge conflicts.</p>
+        <p class="lede">The next additions — AI-assisted prompting and a completed task breakdown — will round out the proposal into a fuller submission.</p>
+      </div>
+    </section>
+
+    <section class="doc-section wide" id="team">
+      <div class="doc-inner">
+        <div class="kicker mono">14 · Team</div>
+        <h2>Meet Team Uzima</h2>
+        <div class="team-grid">
+          <div class="team-card"><div class="team-icon">🛡️</div><div class="team-role mono">LEADERSHIP</div><div class="team-name">Paulette Obimbo</div><div class="team-desc">Team Lead — guiding project vision and overall strategic direction.</div></div>
+          <div class="team-card"><div class="team-icon">🚩</div><div class="team-role mono">MANAGEMENT</div><div class="team-name">Tedd Edwin</div><div class="team-desc">Scrum Master — maintaining the repo, handling merge conflicts and solving pull requests.</div></div>
+          <div class="team-card"><div class="team-icon">&lt;/&gt;</div><div class="team-role mono">DEV</div><div class="team-name">Derick Nyakundi</div><div class="team-desc">Developer — web app architecture &amp; system features.</div></div>
+          <div class="team-card"><div class="team-icon">🤖</div><div class="team-role mono">DEV</div><div class="team-name">Eugene Okoth</div><div class="team-desc">Developer — integrating user-facing elements, and managing chatbot integration.</div></div>
+          <div class="team-card"><div class="team-icon">🎨</div><div class="team-role mono">DEV</div><div class="team-name">Kelvin Njenga</div><div class="team-desc">Developer — crafting clean UI/UX components &amp; performance.</div></div>
+        </div>
+        <p class="footnote center">Dedicated to Kenyan Mental Health Support</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
