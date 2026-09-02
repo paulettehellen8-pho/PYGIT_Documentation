@@ -23,16 +23,31 @@
   <!-- PARALLAX HERO -->
   <section class="hero" id="home">
     <div class="stars" id="stars"></div>
+    <div class="floating-orb orb-one"></div>
+    <div class="floating-orb orb-two"></div>
     <div class="moon" id="moon"></div>
+
+    <div class="game-layer">
+      <div class="git-eater" id="gitEater" aria-label="Git icon eating commits">
+        <span class="git-head">⌘</span>
+        <span class="git-eye eye-one"></span>
+        <span class="git-eye eye-two"></span>
+      </div>
+      <div class="dot-track" id="dotTrack"></div>
+    </div>
+
     <div class="mountains mountains-behind" id="mountains_behind"></div>
 
     <div class="hero-content">
-      <h1 id="text">PyGit TUI</h1>
+      <div class="terminal-badge mono"><span class="pulse-dot"></span> repository detected</div>
+      <h1 id="text"><span id="typedTitle"></span><span class="caret">|</span></h1>
       <p class="hero-subtitle">A Lightweight Terminal Git Client, Built in Python</p>
-      <a href="#documentation" id="btn">Explore Documentation</a>
+      <p class="hero-hint mono">git status · git diff · git commit · git branch</p>
+      <a href="#documentation" id="btn">Explore Documentation <span>↓</span></a>
     </div>
 
     <div class="mountains mountains-front" id="mountains_front"></div>
+    <div class="scroll-cue mono">SCROLL TO EXPLORE <span>↓</span></div>
   </section>
 
   <!-- DOCUMENTATION -->
@@ -189,28 +204,9 @@
       </div>
     </section>
 
-    <!-- <section class="doc-section">
-      <div class="doc-inner">
-        <div class="kicker mono">10 · Current Progress</div>
-        <h2>Current Progress</h2>
-        <table>
-          <tr><th>Feature</th><th>Status</th></tr>
-          <tr><td>Live status / file / branch / commit / stash panels</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>File staging &amp; unstaging</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>Diff viewer</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>Commit modal &amp; commit flow</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>Command palette (stash, switch, merge, pull, push)</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>Merge conflict detection, abort &amp; continue</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>Command log &amp; raw command runner</td><td><span class="status done">Implemented</span></td></tr>
-          <tr><td>AI-assisted commit message / command suggestions</td><td><span class="status planned">Planned</span></td></tr>
-        </table>
-        <p class="footnote">A full task breakdown and remaining to-do list will be added as a separate section by the team.</p>
-      </div>
-    </section> -->
-
     <section class="doc-section">
       <div class="doc-inner">
-        <div class="kicker mono">11 · Future Enhancements</div>
+        <div class="kicker mono">10 · Future Enhancements</div>
         <h2>Future Enhancements</h2>
         <p class="lede">Deliberately out of scope for the current MVP, but reasonable next steps:</p>
         <ul class="bullets">
@@ -225,7 +221,7 @@
 
     <section class="doc-section">
       <div class="doc-inner">
-        <div class="kicker mono">12 · Project Impact</div>
+        <div class="kicker mono">11 · Project Impact</div>
         <h2>Project Impact</h2>
         <div class="callout large">
           <span class="callout-label mono">WHY THIS PROJECT IS WORTH BUILDING</span>
@@ -236,7 +232,7 @@
 
     <section class="doc-section">
       <div class="doc-inner">
-        <div class="kicker mono">13 · Conclusion</div>
+        <div class="kicker mono">12 · Conclusion</div>
         <h2>Conclusion</h2>
         <p class="lede">PyGit TUI takes a well-known problem — the friction of the raw Git CLI — and addresses it with a scoped, working Python terminal application. It is explicitly inspired by lazygit as a category of tool, not a copy of it, and the current build already covers the core loop a developer needs day-to-day: seeing repository state, staging and committing changes, handling branches and stashes, and recovering from merge conflicts.</p>
         <p class="lede">The next additions — AI-assisted prompting and a completed task breakdown — will round out the proposal into a fuller submission.</p>
@@ -245,7 +241,7 @@
 
     <section class="doc-section wide" id="team">
       <div class="doc-inner">
-        <div class="kicker mono">14 · Team</div>
+        <div class="kicker mono">13 · Team</div>
         <h2>Meet Team Uzima</h2>
         <div class="team-grid">
           <div class="team-card"><div class="team-icon">🛡️</div><div class="team-role mono">LEADERSHIP</div><div class="team-name">Paulette Obimbo</div><div class="team-desc">Team Lead — guiding project vision and overall strategic direction.</div></div>
