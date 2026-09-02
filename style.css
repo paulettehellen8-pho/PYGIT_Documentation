@@ -781,3 +781,498 @@ code {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   FOLDER / CARD DOCUMENTATION DECK
+   Inspired by the supplied Solar System Explorer reference:
+   one contained viewport, a side rail, and a stacked-card
+   transition where only folder titles remain visible behind
+   the active page.
+   ========================================================= */
+
+body {
+  overflow: hidden;
+}
+
+#documentation {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  transform: none !important;
+  display: block;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(156,124,255,.09), transparent 42%),
+    linear-gradient(145deg, #090c13 0%, #101521 58%, #080b13 100%);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+body.docs-open #documentation {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.docs-open .hero {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.docs-open header {
+  z-index: 10001;
+  background: rgba(8,11,19,.68);
+  backdrop-filter: blur(18px);
+}
+
+/* soft grid / atmosphere */
+#documentation::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .38;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: radial-gradient(circle at 55% 50%, black 0 40%, transparent 82%);
+}
+
+/* ---------- side icon rail ---------- */
+
+.doc-rail {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 104px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.rail-mark {
+  color: #fff;
+  font: 800 11px 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  opacity: .8;
+}
+
+.rail-line {
+  position: absolute;
+  top: 48px;
+  bottom: 42px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,.16), transparent);
+  pointer-events: none;
+}
+
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  align-items: center;
+}
+
+.rail-item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.42);
+  width: 92px;
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  padding: 3px 4px;
+  transition: color .25s ease, transform .25s ease;
+  font: 500 9px 'JetBrains Mono', monospace;
+}
+
+.rail-item::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 50%;
+  background: #0a0e15;
+  transition: .3s ease;
+}
+
+.rail-item.active {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.rail-item.active::before {
+  width: 9px;
+  height: 9px;
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 15px rgba(51,209,122,.55);
+}
+
+.rail-dot {
+  color: var(--accent);
+  min-width: 19px;
+  text-align: right;
+  opacity: .85;
+}
+
+.rail-label {
+  min-width: 54px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.rail-help {
+  margin-top: 22px;
+  text-align: center;
+  color: rgba(255,255,255,.28);
+  font-size: 7px;
+  line-height: 1.55;
+  letter-spacing: 1.2px;
+}
+
+/* ---------- card deck ---------- */
+
+.doc-card {
+  position: absolute;
+  left: calc(50% + 36px);
+  top: 52%;
+  width: min(77vw, 1110px);
+  height: min(78vh, 780px);
+  min-height: 540px;
+  padding: 0;
+  margin: 0;
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(51,209,122,.055), transparent 28%),
+    linear-gradient(150deg, rgba(19,24,34,.98), rgba(9,12,18,.98));
+  box-shadow:
+    0 32px 90px rgba(0,0,0,.48),
+    0 0 0 1px rgba(51,209,122,.035) inset;
+  transform:
+    translate(-50%, -50%)
+    translate(calc(var(--depth) * 14px), calc(var(--depth) * 13px))
+    scale(calc(1 - (var(--depth) * .018)));
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform .62s cubic-bezier(.22,.8,.2,1),
+    opacity .45s ease,
+    filter .45s ease,
+    box-shadow .45s ease;
+  transform-origin: 50% 100%;
+}
+
+.doc-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.018);
+}
+
+.doc-card.active {
+  filter: none;
+  opacity: 1;
+  box-shadow:
+    0 40px 110px rgba(0,0,0,.55),
+    0 0 0 1px rgba(51,209,122,.08) inset;
+}
+
+.doc-card.is-behind {
+  filter: saturate(.72) brightness(.72);
+}
+
+.doc-card.is-behind .card-body {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.doc-card:not(.is-behind) .card-body {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.doc-card.flip-back {
+  transform:
+    translate(-50%, -50%)
+    translate(110px, -28px)
+    scale(.92)
+    rotate(1.2deg);
+  opacity: .25;
+  filter: brightness(.55);
+  z-index: 250 !important;
+}
+
+.doc-card.flip-forward {
+  transform:
+    translate(-50%, -50%)
+    translate(-90px, 24px)
+    scale(.94)
+    rotate(-1deg);
+  opacity: .35;
+  filter: brightness(.58);
+  z-index: 250 !important;
+}
+
+.folder-tab {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 58px;
+  min-width: 310px;
+  max-width: 70%;
+  padding: 0 24px 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 30;
+  color: #fff;
+  font: 700 13px 'JetBrains Mono', monospace;
+  letter-spacing: .3px;
+  background:
+    linear-gradient(135deg, rgba(43,16,85,.96), rgba(27,35,51,.96));
+  border-right: 1px solid rgba(255,255,255,.13);
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  border-radius: 0 0 16px 0;
+  box-shadow: 12px 8px 30px rgba(0,0,0,.18);
+}
+
+.folder-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 78px;
+  height: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(51,209,122,.35);
+}
+
+.folder-tab b {
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.card-body {
+  position: absolute;
+  inset: 0;
+  padding: 92px 58px 48px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: opacity .35s ease, transform .45s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.22) transparent;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 5px;
+}
+.card-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.22);
+  border-radius: 99px;
+}
+
+/* Keep documentation content compact, like the reference viewport. */
+.doc-inner {
+  width: min(940px, 100%);
+  margin: 0 auto;
+  padding: 0 0 18px;
+}
+
+.doc-section h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  margin-bottom: 20px;
+}
+
+.card-heading {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.card-heading .card-number {
+  display: inline-block;
+  margin-right: 12px;
+  color: var(--accent);
+  font: 700 10px 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  vertical-align: middle;
+}
+
+.doc-card table {
+  margin-top: 8px;
+}
+
+.doc-card .feature-grid {
+  gap: 16px;
+}
+
+.doc-card .feature-card {
+  padding: 14px;
+}
+
+.doc-card .feature-card p {
+  font-size: 12px;
+}
+
+.doc-card .triad {
+  gap: 14px;
+}
+
+.doc-card .triad-card,
+.doc-card .block,
+.doc-card .team-card {
+  padding: 19px;
+}
+
+.doc-card .callout {
+  margin-top: 18px;
+  padding: 16px 20px;
+}
+
+.doc-card .bullets {
+  gap: 11px;
+}
+
+.doc-card .steps {
+  gap: 12px;
+}
+
+.doc-card .term pre {
+  min-height: 86px;
+  padding: 12px;
+  font-size: 11px;
+}
+
+.doc-card.wide {
+  width: min(77vw, 1110px);
+}
+
+/* The reference keeps the active content in a contained frame. */
+.doc-card.active .card-body {
+  max-height: 100%;
+}
+
+@media (max-width: 900px) {
+  .doc-rail {
+    left: 8px;
+    width: 72px;
+  }
+
+  .rail-label {
+    display: none;
+  }
+
+  .rail-item {
+    width: 50px;
+  }
+
+  .doc-card {
+    left: calc(50% + 12px);
+    width: min(84vw, 760px);
+    height: 78vh;
+  }
+
+  .card-body {
+    padding: 88px 28px 34px;
+  }
+
+  .folder-tab {
+    min-width: 250px;
+    max-width: 78%;
+  }
+
+  .feature-grid,
+  .two-col-blocks {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  header ul {
+    display: none;
+  }
+
+  .doc-rail {
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 22px);
+  }
+
+  .rail-mark,
+  .rail-line,
+  .rail-help {
+    display: none;
+  }
+
+  .rail-nav {
+    flex-direction: row;
+    justify-content: center;
+    gap: 3px;
+    overflow: hidden;
+  }
+
+  .rail-item {
+    width: 22px;
+    min-height: 28px;
+    padding: 0;
+  }
+
+  .rail-item::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .rail-dot,
+  .rail-label {
+    display: none;
+  }
+
+  .doc-card {
+    top: 48%;
+    left: 50%;
+    width: 88vw;
+    height: 76vh;
+    min-height: 0;
+    border-radius: 14px;
+  }
+
+  .folder-tab {
+    min-width: 210px;
+    height: 50px;
+    padding-left: 20px;
+    font-size: 10px;
+  }
+
+  .card-body {
+    padding: 76px 18px 55px;
+  }
+}

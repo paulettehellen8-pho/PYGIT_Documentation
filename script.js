@@ -1,124 +1,150 @@
-const stars = document.getElementById('stars');
-const moon = document.getElementById('moon');
-const mountainsBehind = document.getElementById('mountains_behind');
-const text = document.getElementById('text');
-const btn = document.getElementById('btn');
-const mountainsFront = document.getElementById('mountains_front');
-const header = document.getElementById('header');
+const body = document.body;
 const documentation = document.getElementById('documentation');
+const header = document.getElementById('header');
+const btn = document.getElementById('btn');
 const typedTitle = document.getElementById('typedTitle');
-const gitEater = document.getElementById('gitEater');
-const dotTrack = document.getElementById('dotTrack');
+const sections = Array.from(document.querySelectorAll('#documentation .doc-card'));
+const railItems = Array.from(document.querySelectorAll('.rail-item'));
 
-const navLinks = document.querySelectorAll('header a[href^="#"]');
-const sections = document.querySelectorAll('#documentation .doc-section');
-
+let currentIndex = 0;
+let wheelLocked = false;
+let touchStartY = 0;
+let touchStartX = 0;
 let titleIndex = 0;
 const title = 'PyGit TUI';
 
 function typeTitle() {
   if (!typedTitle) return;
-
   typedTitle.textContent = title.slice(0, titleIndex);
-
   if (titleIndex < title.length) {
     titleIndex++;
     setTimeout(typeTitle, 115);
   }
 }
-
 typeTitle();
 
-/* Horizontal scrolling:
- * Wheel/trackpad vertical movement is converted into horizontal movement.
- * Shift + wheel works naturally too.
- * Touch swipes use horizontal gesture handling below.
- */
-let horizontalX = 0;
-let targetX = 0;
-let touchStartX = 0;
-let touchStartY = 0;
-let touchMoved = false;
-
-function maxHorizontalScroll() {
-  return Math.max(0, documentation.scrollWidth - window.innerWidth);
+function openDocumentation(index = 0) {
+  body.classList.add('docs-open');
+  currentIndex = Math.max(0, Math.min(index, sections.length - 1));
+  renderDeck();
 }
 
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
+function closeDocumentation() {
+  body.classList.remove('docs-open');
+  currentIndex = 0;
+  renderDeck();
 }
 
-function renderHorizontal() {
-  horizontalX += (targetX - horizontalX) * 0.12;
-  horizontalX = clamp(horizontalX, 0, maxHorizontalScroll());
+function renderDeck() {
+  const total = sections.length;
 
-  documentation.style.transform = `translate3d(${-horizontalX}px, 0, 0)`;
+  sections.forEach((card, index) => {
+    const depth = (index - currentIndex + total) % total;
+    card.classList.toggle('active', depth === 0);
+    card.classList.toggle('is-behind', depth > 0);
+    card.style.setProperty('--depth', Math.min(depth, 5));
 
-  const progress = maxHorizontalScroll()
-    ? horizontalX / maxHorizontalScroll()
-    : 0;
+    // Keep a useful stack visible behind the active folder.
+    if (depth === 0) {
+      card.style.zIndex = 100;
+    } else {
+      card.style.zIndex = 100 - depth;
+    }
+  });
 
-  // Parallax layers react to horizontal movement too.
-  if (stars) stars.style.transform = `translate3d(${progress * -80}px, 0, 0)`;
-  if (moon) moon.style.marginLeft = `${progress * -60}px`;
-  if (mountainsBehind) mountainsBehind.style.marginLeft = `${progress * -35}px`;
-  if (mountainsFront) mountainsFront.style.marginLeft = `${progress * -8}px`;
+  railItems.forEach((item, index) => {
+    const active = index === currentIndex;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-current', active ? 'page' : 'false');
+  });
 
-  updateActiveLink();
-  requestAnimationFrame(renderHorizontal);
+  const active = sections[currentIndex];
+  if (active) {
+    const titleText = active.querySelector('h2')?.textContent || '';
+    document.title = `${titleText} — PyGit TUI`;
+  }
 }
 
-function openDocumentation() {
-  targetX = 0;
-  // The hero is removed from the horizontal track, so this enters the docs
-  // by replacing the hero with the documentation track.
-  document.body.classList.add('docs-open');
-  window.scrollTo(0, 0);
+function goTo(index, direction = 1) {
+  if (!body.classList.contains('docs-open')) {
+    openDocumentation(index);
+    return;
+  }
+
+  const next = Math.max(0, Math.min(index, sections.length - 1));
+  if (next === currentIndex) return;
+
+  const old = sections[currentIndex];
+  old.classList.add(direction > 0 ? 'flip-back' : 'flip-forward');
+
+  currentIndex = next;
+  renderDeck();
+
+  window.setTimeout(() => {
+    old.classList.remove('flip-back', 'flip-forward');
+  }, 620);
+}
+
+function nextPage() {
+  goTo(Math.min(currentIndex + 1, sections.length - 1), 1);
+}
+
+function previousPage() {
+  goTo(Math.max(currentIndex - 1, 0), -1);
+}
+
+function unlockWheel() {
+  wheelLocked = false;
 }
 
 document.addEventListener('wheel', (event) => {
-  if (!document.body.classList.contains('docs-open')) {
-    if (Math.abs(event.deltaY) > 0) {
-      openDocumentation();
-      targetX += event.deltaY;
+  if (!body.classList.contains('docs-open')) {
+    if (Math.abs(event.deltaY) > 5 || Math.abs(event.deltaX) > 5) {
+      openDocumentation(0);
       event.preventDefault();
     }
     return;
   }
 
-  targetX += event.deltaY + event.deltaX;
-  targetX = clamp(targetX, 0, maxHorizontalScroll());
   event.preventDefault();
+  if (wheelLocked) return;
+
+  const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX)
+    ? event.deltaY
+    : event.deltaX;
+
+  if (Math.abs(delta) < 8) return;
+
+  wheelLocked = true;
+  if (delta > 0) nextPage();
+  else previousPage();
+
+  window.setTimeout(unlockWheel, 700);
 }, { passive: false });
 
 document.addEventListener('keydown', (event) => {
-  if (!document.body.classList.contains('docs-open')) {
-    if (event.key === 'ArrowDown' || event.key === 'PageDown' || event.key === ' ') {
-      openDocumentation();
+  if (!body.classList.contains('docs-open')) {
+    if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(event.key)) {
+      openDocumentation(0);
       event.preventDefault();
     }
     return;
   }
 
-  const amount = window.innerWidth * 0.82;
-
-  if (event.key === 'ArrowRight' || event.key === 'PageDown') {
-    targetX += amount;
+  if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(event.key)) {
+    nextPage();
     event.preventDefault();
-  }
-
-  if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
-    targetX -= amount;
+  } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
+    previousPage();
     event.preventDefault();
-  }
-
-  if (event.key === 'Home') {
-    targetX = 0;
+  } else if (event.key === 'Home') {
+    goTo(0, -1);
     event.preventDefault();
-  }
-
-  if (event.key === 'End') {
-    targetX = maxHorizontalScroll();
+  } else if (event.key === 'End') {
+    goTo(sections.length - 1, 1);
+    event.preventDefault();
+  } else if (event.key === 'Escape') {
+    closeDocumentation();
     event.preventDefault();
   }
 });
@@ -126,92 +152,64 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('touchstart', (event) => {
   touchStartX = event.touches[0].clientX;
   touchStartY = event.touches[0].clientY;
-  touchMoved = false;
 }, { passive: true });
 
-document.addEventListener('touchmove', (event) => {
-  if (!document.body.classList.contains('docs-open')) return;
+document.addEventListener('touchend', (event) => {
+  if (!body.classList.contains('docs-open')) return;
 
-  const x = event.touches[0].clientX;
-  const y = event.touches[0].clientY;
+  const x = event.changedTouches[0].clientX;
+  const y = event.changedTouches[0].clientY;
   const dx = x - touchStartX;
   const dy = y - touchStartY;
 
-  if (Math.abs(dx) > Math.abs(dy)) {
-    targetX -= dx * 1.5;
-    targetX = clamp(targetX, 0, maxHorizontalScroll());
-    touchStartX = x;
-    touchMoved = true;
-    event.preventDefault();
-  }
-}, { passive: false });
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < 45) return;
 
-navLinks.forEach(link => {
+  if (Math.abs(dy) >= Math.abs(dx)) {
+    if (dy < 0) nextPage();
+    else previousPage();
+  } else {
+    if (dx < 0) nextPage();
+    else previousPage();
+  }
+}, { passive: true });
+
+railItems.forEach((item) => {
+  item.addEventListener('click', () => {
+    const index = Number(item.dataset.index);
+    goTo(index, index >= currentIndex ? 1 : -1);
+  });
+});
+
+document.querySelectorAll('header a[href^="#"]').forEach(link => {
   link.addEventListener('click', (event) => {
     const id = link.getAttribute('href');
 
     if (id === '#home') {
       event.preventDefault();
-      document.body.classList.remove('docs-open');
-      targetX = 0;
+      closeDocumentation();
       return;
     }
 
     if (id === '#documentation') {
       event.preventDefault();
-      openDocumentation();
-      targetX = 0;
+      openDocumentation(0);
       return;
     }
 
     const section = document.querySelector(id);
     if (section) {
       event.preventDefault();
-      openDocumentation();
-      const index = Array.from(sections).indexOf(section);
-      targetX = Math.max(0, index) * window.innerWidth;
+      const index = sections.indexOf(section);
+      openDocumentation(index >= 0 ? index : 0);
     }
   });
 });
 
-function updateActiveLink() {
-  const pageIndex = Math.round(horizontalX / window.innerWidth);
-
-  navLinks.forEach(link => {
-    const target = link.getAttribute('href');
-    let active = false;
-
-    if (!document.body.classList.contains('docs-open')) {
-      active = target === '#home';
-    } else if (target === '#documentation') {
-      active = pageIndex < sections.length - 1;
-    } else if (target === '#team') {
-      active = pageIndex === sections.length - 1;
-    }
-
-    link.classList.toggle('active', active);
+if (btn) {
+  btn.addEventListener('click', (event) => {
+    event.preventDefault();
+    openDocumentation(0);
   });
 }
 
-/* Original reference-inspired parallax values for the hero. */
-window.addEventListener('scroll', () => {
-  const value = window.scrollY;
-
-  if (!document.body.classList.contains('docs-open')) {
-    if (stars) stars.style.left = `${value * 0.25}px`;
-    if (moon) moon.style.top = `${17 + value * 0.105}%`;
-    if (mountainsBehind) mountainsBehind.style.bottom = `${-2 - value * 0.05}%`;
-    if (mountainsFront) mountainsFront.style.bottom = '-2%';
-    if (text) {
-      text.style.marginRight = `${value * 0.35}px`;
-      text.style.marginTop = `${value * 0.15}px`;
-    }
-    if (btn) btn.style.marginTop = `${32 + value * 0.08}px`;
-  }
-}, { passive: true });
-
-window.addEventListener('resize', () => {
-  targetX = clamp(targetX, 0, maxHorizontalScroll());
-});
-
-renderHorizontal();
+renderDeck();

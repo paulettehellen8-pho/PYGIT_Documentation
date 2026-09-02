@@ -51,12 +51,32 @@
   </section>
 
   <!-- DOCUMENTATION -->
-  <main id="documentation">
+  <main id="documentation">    <aside class="doc-rail" id="docRail" aria-label="Documentation sections">
+      <div class="rail-mark">PYGIT</div>
+      <div class="rail-line"></div>
+      <nav class="rail-nav">
+        <button class="rail-item active" data-index="0" aria-label="Project Overview"><span class="rail-dot">01</span><span class="rail-label">Overview</span></button>
+        <button class="rail-item" data-index="1" aria-label="Target Users"><span class="rail-dot">02</span><span class="rail-label">Users</span></button>
+        <button class="rail-item" data-index="2" aria-label="Problem Statement"><span class="rail-dot">03</span><span class="rail-label">Problem</span></button>
+        <button class="rail-item" data-index="3" aria-label="Proposed Solution"><span class="rail-dot">04</span><span class="rail-label">Solution</span></button>
+        <button class="rail-item" data-index="4" aria-label="Objectives"><span class="rail-dot">05</span><span class="rail-label">Objectives</span></button>
+        <button class="rail-item" data-index="5" aria-label="Key Features"><span class="rail-dot">06</span><span class="rail-label">Features</span></button>
+        <button class="rail-item" data-index="6" aria-label="System Architecture"><span class="rail-dot">07</span><span class="rail-label">Architecture</span></button>
+        <button class="rail-item" data-index="7" aria-label="System Workflow"><span class="rail-dot">08</span><span class="rail-label">Workflow</span></button>
+        <button class="rail-item" data-index="8" aria-label="User Interface Design"><span class="rail-dot">09</span><span class="rail-label">UI Design</span></button>
+        <button class="rail-item" data-index="9" aria-label="Future Enhancements"><span class="rail-dot">10</span><span class="rail-label">Future</span></button>
+        <button class="rail-item" data-index="10" aria-label="Project Impact"><span class="rail-dot">11</span><span class="rail-label">Impact</span></button>
+        <button class="rail-item" data-index="11" aria-label="Conclusion"><span class="rail-dot">12</span><span class="rail-label">Conclusion</span></button>
+        <button class="rail-item" data-index="12" aria-label="Team"><span class="rail-dot">13</span><span class="rail-label">Team</span></button>
+      </nav>
+      <div class="rail-help mono">SCROLL<br>TO FLIP</div>
+    </aside>
 
-    <section class="doc-section">
+
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Project Overview</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">01 · Project Overview</div>
-        <h2>Project Overview</h2>
+        <div class="card-heading"><span class="card-number">01</span><h2>Project Overview</h2></div>
         <table>
           <tr><th>Field</th><th>Details</th></tr>
           <tr><td>Project Name</td><td>PyGit TUI</td></tr>
@@ -72,12 +92,12 @@
           <p>PyGit TUI is a terminal dashboard that lets developers see their Git status, stage files, view diffs, and run common Git commands — without memorizing flags or leaving the keyboard.</p>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Target Users</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">02 · Target Users</div>
-        <h2>Target Users</h2>
+        <div class="card-heading"><span class="card-number">02</span><h2>Target Users</h2></div>
         <p class="lede">PyGit TUI is aimed at people who use Git regularly but find the raw CLI unforgiving:</p>
         <ul class="bullets">
           <li>Junior developers and students who are still building confidence with Git commands and benefit from seeing status, branches, and diffs all at once.</li>
@@ -89,12 +109,12 @@
           <p>Git's CLI is powerful but unforgiving — a single wrong flag can lose work. A visual, keyboard-driven dashboard reduces that risk while still teaching the underlying commands (every action is logged verbatim in the command log).</p>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Problem Statement</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">03 · Problem Statement</div>
-        <h2>Problem Statement</h2>
+        <div class="card-heading"><span class="card-number">03</span><h2>Problem Statement</h2></div>
         <p class="lede">Git is the industry-standard version control system, but its command-line interface presents real friction for newer developers:</p>
         <ul class="bullets">
           <li>Core actions (staging, diffing, stashing, branching) each require separate commands and flags, which are easy to forget or mistype.</li>
@@ -103,12 +123,12 @@
           <li>Existing polished solutions (e.g. lazygit) are excellent but are written in Go and are effectively "black boxes" to a Python-focused learning team — there's little room to learn from or extend them in a class setting.</li>
         </ul>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Proposed Solution</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">04 · Proposed Solution</div>
-        <h2>Proposed Solution</h2>
+        <div class="card-heading"><span class="card-number">04</span><h2>Proposed Solution</h2></div>
         <p class="lede">PyGit TUI re-creates the core experience of a terminal Git dashboard, in Python, using the <strong>Textual</strong> framework. It wraps everyday Git commands behind a live, two-column terminal interface so a developer can see everything relevant to their repository at a glance and act on it with single keystrokes.</p>
         <div class="triad">
           <div class="triad-card"><div class="triad-icon">👁</div><h3>See</h3><p>Live status, file changes, branches, commit history, and stashes — refreshed automatically.</p></div>
@@ -116,12 +136,12 @@
           <div class="triad-card"><div class="triad-icon">🛟</div><h3>Recover</h3><p>A dedicated conflict view with abort/continue controls for merges, plus a raw command runner for anything not yet covered.</p></div>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Objectives</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">05 · Objectives</div>
-        <h2>Objectives</h2>
+        <div class="card-heading"><span class="card-number">05</span><h2>Objectives</h2></div>
         <ul class="bullets">
           <li>Provide a single-screen, always-current view of a Git repository's state.</li>
           <li>Let users stage, unstage, and commit changes without typing raw Git commands.</li>
@@ -131,12 +151,12 @@
           <li>Build the whole tool as a fair, junior-appropriate scope: fewer features than lazygit, but each one working reliably.</li>
         </ul>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section wide">
+    <section class="doc-section doc-card" wide"><div class="folder-tab"><span>Key Features</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">06 · Key Features</div>
-        <h2>Key Features</h2>
+        <div class="card-heading"><span class="card-number">06</span><h2>Key Features</h2></div>
         <div class="feature-grid">
           <div class="feature-card"><div class="term"><div class="term-bar"><i></i><i></i><i></i><span>dashboard.py</span></div><pre><b>$</b> pygit-tui
 <span># status | staged | branches | log | stash</span>
@@ -157,12 +177,12 @@
 &gt; type a raw command...</pre></div><h3>6.6 Command Log &amp; Raw Command Runner</h3><p>Every UI action is echoed into a running log showing the exact Git command and output — a transparent teaching aid. The same panel accepts arbitrary shell commands.</p></div>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>System Architecture</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">07 · System Architecture</div>
-        <h2>System Architecture</h2>
+        <div class="card-heading"><span class="card-number">07</span><h2>System Architecture</h2></div>
         <table>
           <tr><th>Layer</th><th>Technology</th></tr>
           <tr><td>Language</td><td>Python 3</td></tr>
@@ -173,12 +193,12 @@
         </table>
         <div class="callout"><p>The design deliberately separates concerns: <code>git_checker.py</code> holds every function that talks to Git (status, diff, commit, branch, stash, merge, conflict detection), while <code>lg.py</code> is purely responsible for UI. This keeps the Git logic testable and reusable independent of the interface.</p></div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>System Workflow</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">08 · System Workflow</div>
-        <h2>System Workflow</h2>
+        <div class="card-heading"><span class="card-number">08</span><h2>System Workflow</h2></div>
         <ol class="steps">
           <li>User runs the app from inside a Git repository; the dashboard confirms repo status and populates all panels.</li>
           <li>User browses changed files and previews diffs by highlighting entries in the file list.</li>
@@ -189,12 +209,12 @@
           <li>Throughout, the command log records every underlying Git call and result, and can also accept free-form commands directly.</li>
         </ol>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>User Interface Design</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">09 · User Interface Design</div>
-        <h2>User Interface Design</h2>
+        <div class="card-heading"><span class="card-number">09</span><h2>User Interface Design</h2></div>
         <p class="lede">A single terminal screen split into two columns, plus modal overlays for focused input:</p>
         <div class="two-col-blocks">
           <div class="block"><h3>Main Dashboard</h3><ul class="bullets tight"><li>Left column: repository status, file list (staged/unstaged), branch list, commit history, stash list.</li><li>Right column: diff viewer, merge-conflict panel (shown only when relevant), command log with an inline command runner.</li></ul></div>
@@ -202,12 +222,12 @@
         </div>
         <div class="callout"><p>Global keybindings include <code>d</code> to toggle light/dark theme, <code>c</code> to commit, and <code>:</code> to open the command palette — echoing familiar patterns from vim and lazygit for a low-friction learning curve.</p></div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Future Enhancements</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">10 · Future Enhancements</div>
-        <h2>Future Enhancements</h2>
+        <div class="card-heading"><span class="card-number">10</span><h2>Future Enhancements</h2></div>
         <p class="lede">Deliberately out of scope for the current MVP, but reasonable next steps:</p>
         <ul class="bullets">
           <li>AI-assisted prompting — using an AI API to suggest commit messages from staged diffs, or to explain a merge conflict in plain language.</li>
@@ -217,32 +237,32 @@
           <li>Packaging as an installable CLI tool (e.g. via pip) rather than running the script directly.</li>
         </ul>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Project Impact</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">11 · Project Impact</div>
-        <h2>Project Impact</h2>
+        <div class="card-heading"><span class="card-number">11</span><h2>Project Impact</h2></div>
         <div class="callout large">
           <span class="callout-label mono">WHY THIS PROJECT IS WORTH BUILDING</span>
           <p>It tackles a genuine pain point — Git's steep CLI learning curve — with a scope that's realistic for a junior team: not trying to out-build lazygit, but to understand and reproduce its core ideas in a language the team already knows well. It also doubles as a learning exercise in terminal UI design, process management via subprocess, and state-driven interfaces via Textual's reactive model.</p>
         </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section">
+    <section class="doc-section doc-card""><div class="folder-tab"><span>Conclusion</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">12 · Conclusion</div>
-        <h2>Conclusion</h2>
+        <div class="card-heading"><span class="card-number">12</span><h2>Conclusion</h2></div>
         <p class="lede">PyGit TUI takes a well-known problem — the friction of the raw Git CLI — and addresses it with a scoped, working Python terminal application. It is explicitly inspired by lazygit as a category of tool, not a copy of it, and the current build already covers the core loop a developer needs day-to-day: seeing repository state, staging and committing changes, handling branches and stashes, and recovering from merge conflicts.</p>
         <p class="lede">The next additions — AI-assisted prompting and a completed task breakdown — will round out the proposal into a fuller submission.</p>
       </div>
-    </section>
+    </div></section>
 
-    <section class="doc-section wide" id="team">
+    <section class="doc-section doc-card" wide" id="team"><div class="folder-tab"><span>Meet Team Uzima</span><b>›</b></div><div class="card-body">
       <div class="doc-inner">
         <div class="kicker mono">13 · Team</div>
-        <h2>Meet Team Uzima</h2>
+        <div class="card-heading"><span class="card-number">13</span><h2>Meet Team Uzima</h2></div>
         <div class="team-grid">
           <div class="team-card"><div class="team-icon">🛡️</div><div class="team-role mono">LEADERSHIP</div><div class="team-name">Paulette Obimbo</div><div class="team-desc">Team Lead — guiding project vision and overall strategic direction.</div></div>
           <div class="team-card"><div class="team-icon">🚩</div><div class="team-role mono">MANAGEMENT</div><div class="team-name">Tedd Edwin</div><div class="team-desc">Scrum Master — maintaining the repo, handling merge conflicts and solving pull requests.</div></div>
@@ -252,7 +272,7 @@
         </div>
         <p class="footnote center">Dedicated to Kenyan Mental Health Support</p>
       </div>
-    </section>
+    </div></section>
 
   </main>
 
